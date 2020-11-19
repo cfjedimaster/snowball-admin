@@ -49,11 +49,16 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       if(this.email === '' || this.password === '') return;
       console.log('attempt login');
-      console.log('userService', userService);
-      userService.login(this.email, this.password);
+      try {
+        let resp = await userService.login(this.email, this.password);
+        console.log('ok login');
+        this.$router.replace({path:'/'});
+      } catch(e) {
+        alert('logn error');
+      }
     }
   }
 }

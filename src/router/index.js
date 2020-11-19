@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import { userService } from '@/api/user';
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,7 @@ router.beforeEach((to, from, next) => {
 })
 
 function loggedIn() {
-  return false;
+  return userService.isLoggedIn();
 }
 
 

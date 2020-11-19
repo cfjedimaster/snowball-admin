@@ -6,71 +6,47 @@ const auth = new GoTrue({
   setCookie: true
 });
 
-const hash = (document.location.hash || "").replace(/^#\/?/, "");
-if (hash) {
-  const [key, value] = hash.split("=");
-  /*
-  if (key === "confirmation_token") handleSignupConfirm(value);
-  else if (key === "recovery_token") handleRecovery(value);
-  */
-  console.log(key);
-  if(key === 'invite_token') handleInviteToken(value);
-}
-
-function handleInviteToken(token) {
-
 /*
-	auth.signup('raymondcamden@gmail.com', 'alldownhillfromhere')
-	.then(res => {
-		console.log(res);
-	});
-	*/
+this is how you fake add a user
+auth.signup('raymondcamden@gmail.com', 'remove')
+.then(res => {
+	console.log(res);
+})
+.catch(e => {
+	console.log('e', e);
+});
+*/
 
-	auth
-    .confirm(token, true)
-    .then(response => {
-		console.log(response);
-		/*
-      window.location.assign("/signup/confirm-success/");
-      axios
-        .post("/.netlify/functions/activecampaign", {
-          email: response.email,
-        })
-        .then(function (response) {
-          // we don't need to do anything
-        })
-        .catch(function (error) {
-          // it's okay, just ignore it
-        });
-		*/
-    })
-    .catch(function (e) {
-		console.error(e);
-    });
-	
-}
+
 export const userService = {
 
-	login(username,password) {
+	async login(username,password) {
 		//ntl identiy
 		console.log('auth',username,password);
+		return auth.login(username,password,true);
+		/*
 		auth.login(username, password, true)
 		.then(response => {
 			console.log(response);
+			return true;
 		})
 		.catch(error => {
-			/*
+			
 			if (errorMessage && error.json)
 			errorMessage.innerHTML = error.json.error_description;
 			else {
 			console.log("Failed to login user: %o", error);
 			throw error;
 			}
-			*/
+			
 			console.error(error);
 		});
+		*/
 
-
+	},
+	isLoggedIn() {
+		console.log('isLoggedIn running', auth.currentUser());
+		return auth.currentUser();
 	}
 
 }
