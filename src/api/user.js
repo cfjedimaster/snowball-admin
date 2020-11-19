@@ -44,9 +44,11 @@ export const userService = {
 		*/
 
 	},
-	isLoggedIn() {
-		console.log('isLoggedIn running', auth.currentUser());
+	getMe() {
 		return auth.currentUser();
+	},
+	isLoggedIn() {
+		return !!auth.currentUser();
 	}
 
 }
