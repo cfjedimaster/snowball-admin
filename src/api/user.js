@@ -19,12 +19,13 @@ if (hash) {
 
 function handleInviteToken(token) {
 
-
+/*
 	auth.signup('raymondcamden@gmail.com', 'alldownhillfromhere')
 	.then(res => {
 		console.log(res);
 	});
-/*
+	*/
+
 	auth
     .confirm(token, true)
     .then(response => {
@@ -41,12 +42,12 @@ function handleInviteToken(token) {
         .catch(function (error) {
           // it's okay, just ignore it
         });
-		
+		*/
     })
     .catch(function (e) {
 		console.error(e);
     });
-	*/
+	
 }
 export const userService = {
 
