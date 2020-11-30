@@ -49,6 +49,9 @@ export const userService = {
 	},
 	isLoggedIn() {
 		return !!auth.currentUser();
+	},
+	async logout() {
+		return this.getMe().logout();
 	}
 
 }

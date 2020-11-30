@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { userService } from '@/api/user';
+import { dataService } from '@/api/data';
 
 export default {
 	data() {
@@ -19,14 +19,7 @@ export default {
 	},
 	async mounted() {
 		console.log('get projects');
-		this.me = userService.getMe();
-		this.projects = await fetch('/.netlify/functions/get-projects', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization':'Bearer ' + this.me.token.access_token
-			},
-		}).then((res) => res.json());
+		this.projects = await dataService.getProjects();
 
 		this.projects.forEach(p => {
 			p.updated = dateFormat(p.updated);

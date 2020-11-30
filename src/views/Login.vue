@@ -52,9 +52,11 @@ export default {
     async login() {
       if(this.email === '' || this.password === '') return;
       console.log('attempt login');
+      //todo: migrate this into the store
       try {
         let resp = await userService.login(this.email, this.password);
         console.log('ok login');
+        this.$store.dispatch('checkLoginState');
         this.$router.replace({path:'/'});
       } catch(e) {
         alert('logn error');

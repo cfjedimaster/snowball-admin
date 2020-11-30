@@ -30,6 +30,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "project" */ '../views/Project.vue')    
   },
   {
+    path:'/owners',
+    name:'Owners',
+    component: () => import(/* webpackChunkName: "owners" */ '../views/Owners.vue')
+  },
+  {
+    path:'/owner/:id',
+    name:'Owner',
+    component: () => import(/* webpackChunkName: "owner" */ '../views/Owner.vue')    
+  },
+  {
     path:'*',
     redirect:'/'
   }
