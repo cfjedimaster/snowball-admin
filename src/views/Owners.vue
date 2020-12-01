@@ -3,6 +3,8 @@
 		<b-col cols="6" >
 			<b-table striped hover bordered :items="owners" :fields="fields" selectable @row-selected="loadOwner">
 			</b-table>
+
+			<b-btn variant="primary" href="/owner/new">Add Owner</b-btn>
 		</b-col>
 	</b-row>
 </template>

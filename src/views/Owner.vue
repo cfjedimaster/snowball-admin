@@ -62,10 +62,21 @@ export default {
 	},
 	async mounted() {
 		let id = this.$route.params.id;
-		this.owner = await dataService.getOwner(id);
+		if(id !== 'new') {
+			this.owner = await dataService.getOwner(id);
+		} else {
+			this.owner = dataService.newOwner();
+		}
 		console.log('got an owner');
 	},
 	methods: {
+		async save() {
+			// No validation for now, KISS
+			console.log(this.owner);
+			await dataService.saveOwner(this.owner);
+			console.log('owner saved');
+			this.$router.replace('/owners');
+		}
 	}
 }
 </script>
