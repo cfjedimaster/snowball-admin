@@ -37,7 +37,7 @@ const handler = async (event, context) => {
 		//add the id
 		result.id = po.project.ref.id;
 		result.owner = po.ownerOb.data;
-    result.updated = new Date(await client.query(q.Format('%t', result.updated)));
+	    result.updated = new Date(await client.query(q.Format('%t', result.updated)));
 		return result;
 	}));
 

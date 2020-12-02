@@ -30,6 +30,18 @@ export const dataService = {
 		}).then((res) => res.json());
 
 	}, 
+	async getProject(id) {
+
+		let me = await userService.getMe();
+
+		return await fetch(`/.netlify/functions/get-project?id=${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization':'Bearer ' + me.token.access_token
+			},
+		}).then((res) => res.json());
+	},
 	async getProjects() {
 
 		let me = await userService.getMe();

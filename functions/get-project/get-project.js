@@ -73,12 +73,15 @@ async function getProject(id) {
 
 
 	let project = projectOb.project.data;
+  console.log(project);
 	//add the id
 	project.id = projectOb.project.ref.id;
 	project.owner = projectOb.ownerOb.data;
+  project.owner.id = projectOb.ownerOb.ref.id;
 
-	//format date 
-	//project.shipDate = new Date(await client.query(q.Format('%t', project.shipDate)));
+  project.shipDate = new Date(await client.query(q.Format('%t', project.shipDate)));
+  project.closeDate = new Date(await client.query(q.Format('%t', project.closeDate)));
+
 
 	return project;
 }
