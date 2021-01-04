@@ -5,7 +5,6 @@ const faunadb = require('faunadb'),
 const handler = async (event, context) => {
 
 	const {identity, user} = context.clientContext;
-
 	if(!user) {
 		return {
 			statusCode: 500,
@@ -18,9 +17,8 @@ const handler = async (event, context) => {
 	let ownerObs = await client.query(
 		q.Map(
 			q.Paginate(q.Documents(q.Collection('users'))),
-  			q.Lambda(f => q.Get(f)
-      )
-    )
+  			q.Lambda(f => q.Get(f))
+	    )
 	);
 
   const data = await Promise.all(ownerObs.data.map(async po => {
@@ -31,9 +29,9 @@ const handler = async (event, context) => {
 	}));
 
 	return {
-    statusCode:200,
-    body:JSON.stringify(data)
-  };
+		statusCode:200,
+		body:JSON.stringify(data)
+	};
 
 
 }
