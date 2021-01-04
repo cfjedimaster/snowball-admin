@@ -1,9 +1,11 @@
 <template>
-	<div>	
-
-		<b-table striped hover bordered :items="projects" :fields="fields" selectable @row-selected="loadProject">
-		</b-table>
-	</div>
+	<b-row align-h="center">
+		<b-col cols="6" >
+			<b-table striped hover bordered :items="projects" :fields="fields" selectable @row-selected="loadProject">
+			</b-table>
+			<b-btn variant="primary" href="/project/new">Add Project</b-btn>
+		</b-col>
+	</b-row>
 </template>
 
 <script>

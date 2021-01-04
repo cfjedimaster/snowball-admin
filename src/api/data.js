@@ -62,6 +62,23 @@ export const dataService = {
 			picture:''
 		}
 	},
+	newProject() {
+		return {
+			name:'',
+			public:false,
+			owner:this.newOwner(),
+			urlslug:'',
+			header:'',
+			subheader:'',
+			video:'',
+			callout:'',
+			description:'',
+			price:'',
+			shipDate:null,
+			closeDate:null,
+			salesLadder:[]
+		}
+	},
 	async saveOwner(owner) {
 		let me = await userService.getMe();
 

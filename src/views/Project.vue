@@ -159,7 +159,12 @@ export default {
 	},
 	async mounted() {
 		let id = this.$route.params.id;
-		this.project = await dataService.getProject(id);
+		if(id !== 'new') {
+			this.project = await dataService.getProject(id);
+		} else {
+			this.project = dataService.newProject();
+		}
+
 		this.toAdd = 20 - this.project.salesLadder.length;
 		for(let i=0;i<this.toAdd;i++) {
 			this.newSalesLadder[i] = { amount: '', price: '' };
