@@ -180,7 +180,7 @@ export default {
 
 	},
 	methods:{
-		save() {
+		async save() {
 			// collect the data, which is mostly easy except for newSalesLadder
 			for(let i=0;i<this.newSalesLadder.length; i++) {
 				if(this.newSalesLadder[i].amount && this.newSalesLadder[i].price) {
@@ -191,6 +191,11 @@ export default {
 				}
 			}
 			console.log('Ok, project is now: ', this.project);
+
+			await dataService.saveProject(this.project);
+			console.log('project saved');
+			this.$router.replace('/projects');
+
 		}
 	}
 }

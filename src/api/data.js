@@ -64,16 +64,16 @@ export const dataService = {
 	},
 	newProject() {
 		return {
-			name:'',
+			name:'p1',
 			public:false,
 			owner:this.newOwner(),
-			urlslug:'',
-			header:'',
-			subheader:'',
-			video:'',
-			callout:'',
-			description:'',
-			price:'',
+			urlslug:'s1',
+			header:'h1',
+			subheader:'s1',
+			video:'v1',
+			callout:'c1',
+			description:'d1',
+			price:'99',
 			shipDate:null,
 			closeDate:null,
 			salesLadder:[]
@@ -91,6 +91,18 @@ export const dataService = {
 			},
 		}).then((res) => res.text());
 
+	},
+	async saveProject(project) {
+		let me = await userService.getMe();
+
+		return await fetch('/.netlify/functions/save-project', {
+			method: 'POST',
+			body: JSON.stringify(project),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization':'Bearer ' + me.token.access_token
+			},
+		}).then((res) => res.text());
 	},
 	async siteRebuild() {
 		return await fetch('https://api.netlify.com/build_hooks/5fc69d8cf6603f3bea84651e', { method: 'POST' });

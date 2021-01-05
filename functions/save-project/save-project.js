@@ -25,6 +25,7 @@ exports.handler = async (event, context) => {
       body: ''
     }
   } catch (err) {
+    console.log(err);
     return { statusCode: 500, body: err.toString() }
   }
 }
@@ -33,10 +34,27 @@ exports.handler = async (event, context) => {
 async function saveProject(project) {
   const client = new faunadb.Client({ secret: process.env.FAUNADB })
 
-  if(owner.id) {
-    let id = owner.id;
-    delete owner.id;
-    console.log('called with '+JSON.stringify(project));
+  console.log('called with '+JSON.stringify(project));
+
+  /*
+  convert closeDate, shipDate, created, updated
+  ship and close date come in as date + time, we just need need date
+  convert owner
+  */
+  project.closeDate = fixDate(project.closeDate);
+  project.shipDate = fixDate(project.shipDate);
+  project.updated = q.Now();
+
+  project.owner =  q.Ref(q.Collection('users'), project.owner.id)
+
+  //console.log(project);
+
+  if(project.id) {
+    console.log('set created to '+JSON.stringify(project.created));
+    project.created = q.Time(project.created);
+    let id = project.id;
+    delete project.id;
+    console.log('edit project',id);
 
     await client.query(
       q.Update(
@@ -48,6 +66,7 @@ async function saveProject(project) {
   	return;
   } else {
     console.log('make a new project');
+    project.created = q.Now();
     await client.query(
       q.Create(
         q.Collection('projects'), 
@@ -57,6 +76,16 @@ async function saveProject(project) {
 
     return;
   }
+}
+
+function fixDate(d) {
+  let date = new Date(d);
+  let month = date.getMonth()+1;
+  if(month < 10) month = '0' + month;
+  let day = date.getDate();
+  if(day < 10) day = '0' + day;
+  dateStr = date.getFullYear()+'-'+month+'-'+day;
+  return q.Date(dateStr);
 }
 
 

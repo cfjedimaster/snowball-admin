@@ -82,6 +82,9 @@ async function getProject(id) {
   project.shipDate = new Date(await client.query(q.Format('%t', project.shipDate)));
   project.closeDate = new Date(await client.query(q.Format('%t', project.closeDate)));
 
+  project.created = new Date(await client.query(q.Format('%t', project.created)));
+  project.updated = new Date(await client.query(q.Format('%t', project.updated)));
+
 
 	return project;
 }
