@@ -43,26 +43,34 @@
 			</b-row>
 			<b-row class="mb-3">
 				<b-col cols="3">
-					<label for="header">Header:</label>
+					<label for="hero">Hero: (16:9 aspect ratio, at least 2400px wide)</label>
 				</b-col>
 				<b-col cols="9">
-					<b-form-input id="header" v-model="project.header" required></b-form-input>
+					<b-form-input id="hero" v-model="project.hero" required></b-form-input>
 				</b-col>
 			</b-row>
 			<b-row class="mb-3">
 				<b-col cols="3">
-					<label for="subheader">Subheader:</label>
+					<label for="card">Card: (16:9 aspect ratio currently but could be more square-ish, at least 1000px wide)</label>
 				</b-col>
 				<b-col cols="9">
-					<b-form-input id="subheader" v-model="project.subheader" required></b-form-input>
+					<b-form-input id="card" v-model="project.card" required></b-form-input>
 				</b-col>
 			</b-row>
+			<b-row class="mb-3">
+				<b-col cols="3">
+					<label for="social">Social Share: (exactly 1200 x 628)</label>
+				</b-col>
+				<b-col cols="9">
+					<b-form-input id="social" v-model="project.social"></b-form-input>
+				</b-col>
+			</b-row>			
 			<b-row class="mb-3">
 				<b-col cols="3">
 					<label for="video">Video:</label>
 				</b-col>
 				<b-col cols="9">
-					<b-form-input id="video" v-model="project.video" required></b-form-input>
+					<b-form-input id="video" v-model="project.video"></b-form-input>
 				</b-col>
 			</b-row>
 			<b-row class="mb-3">
