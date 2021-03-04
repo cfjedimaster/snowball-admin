@@ -48,6 +48,10 @@ export const userService = {
 		return auth.currentUser();
 	},
 	isLoggedIn() {
+		let user = auth.currentUser();
+		if(!user) return false;
+		//force refresh if need be
+		user.jwt();
 		return !!auth.currentUser();
 	},
 	async logout() {
